@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
 
+<h1>CHAT BUD</h1>
+
+<h1>GROUP LIST</h1>
+
     {% for group in groups %}
     <div class="container" style="max-width: 800px; margin : 0 auto;">
     <div class="jumbotron">
         <div id="project">
-            <h2 id="btitle"><a href="#" style="color:#bc873e "><center><strong>{{ group.description }}</strong><center></a></h2>
+            <h2 id="btitle"><a href={{ group.id }} style="color:#bc873e "><center><strong>{{ group.title}}</strong><center></a></h2>
             <p id="date"><center>{{ group.created }}</center></p>
         </div>
         <p id="text">{{ group.admin.username|linebreaksbr }}</p>
