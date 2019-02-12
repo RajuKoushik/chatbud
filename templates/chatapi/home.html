@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    {% for group in groups %}
+    <div class="container" style="max-width: 800px; margin : 0 auto;">
+    <div class="jumbotron">
+        <div id="project">
+            <h2 id="btitle"><a href="#" style="color:#bc873e "><center><strong>{{ group.description }}</strong><center></a></h2>
+            <p id="date"><center>{{ group.created }}</center></p>
+        </div>
+        <p id="text">{{ group.admin.username|linebreaksbr }}</p>
+    </div>
+    </div>
+{% endfor %}
+
+</head>
+<body>
+
+</body>
+</html>
