@@ -270,6 +270,7 @@
 
                         {% for message in messages %}
 
+                            {% if message.author.username in current_user.username %}
 
                             <div class="row msg_container base_sent">
                                 <div class="col-md-10 col-xs-10">
@@ -284,6 +285,34 @@
                                          class=" img-responsive ">
                                 </div>
                             </div>
+
+                            {% else %}
+
+                                <div class="row msg_container base_receive">
+                            <div class="col-md-2 col-xs-2 avatar">
+                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
+                                     class=" img-responsive ">
+                            </div>
+                            <div class="col-md-10 col-xs-10">
+                                <div class="messages msg_receive">
+                                    <p>{{ message.content }}</p>
+                                    <time datetime="2009-11-13T20:00">{{ message.author.username }}
+                                            • {{ message.created }}</time>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                            {% endif %}
+
+
+
+
+
+
+
+
 
                         {% endfor %}
 
