@@ -1,6 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $("#sendMessage").click(function () {
+                var message = $("#message").val();
+                var usrl = $("#sendMessage").attr("data-validate-username-url")
+                var username = $("#sendMessage").attr("data-username")
+                var time = 'just now'
+
+                $.ajax({
+                    url: usrl,
+                    data: {
+                        'message': message
+                    },
+
+                    method: 'POST',
+                    success: function (data) {
+                        if (data.is_success) {
+                            $("#theAppendId").append(" <div class=\"row msg_container base_sent\">\n" +
+                                "                            <div class=\"col-md-10 col-xs-10\">\n" +
+                                "                                <div class=\"messages msg_sent\">\n" +
+                                "                                    <p>" + message + "</p>\n" +
+                                "                                    <time datetime=\"2009-11-13T20:00\">" + username + " • " + time + "</time>\n" +
+                                "                                </div>\n" +
+                                "                            </div>\n" +
+                                "                            <div class=\"col-md-2 col-xs-2 avatar\">\n" +
+                                "                                <img src=\"http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg\"\n" +
+                                "                                     class=\" img-responsive \">\n" +
+                                "                            </div>\n" +
+                                "                        </div>");
+                        }
+
+
+                        if (data.is_taken) {
+                            alert(data.error_message);
+                        }
+                    },
+                    error: function (data) {
+                        $("#theAppendId").append(" <div class=\"row msg_container base_sent\">\n" +
+                            "                            <div class=\"col-md-10 col-xs-10\">\n" +
+                            "                                <div class=\"messages msg_sent\">\n" +
+                            "                                    <p>" + message + "</p>\n" +
+                            "                                    <time datetime=\"2009-11-13T20:00\">" + username + " • " + time + "</time>\n" +
+                            "                                </div>\n" +
+                            "                            </div>\n" +
+                            "                            <div class=\"col-md-2 col-xs-2 avatar\">\n" +
+                            "                                <img src=\"http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg\"\n" +
+                            "                                     class=\" img-responsive \">\n" +
+                            "                            </div>\n" +
+                            "                        </div>");
+                    }
+                });
+            });
+        });
+
+
+    </script>
+{% endblock %}
+
 <style>
 
     .chatperson {
@@ -237,7 +299,7 @@
                                 - {{ group_details.title }}</h3>
                         </div>
                     </div>
-                    <div class="panel-body msg_container_base">
+                    <div id="theAppendId" class="panel-body msg_container_base">
                         <div class="row msg_container base_sent">
                             <div class="col-md-10 col-xs-10">
                                 <div class="messages msg_sent">
@@ -317,31 +379,29 @@
 
                     </div>
                     <div class="panel-footer">
-                        <form action="{% url 'send_message' group_details.id %}" method="post">
-                            {% csrf_token %}
 
 
-                            <div class="input-group">
+                        <div class="input-group">
 
-                                <input id="btn-input" type="text" class="form-control input-sm chat_input"
-                                       placeholder="Write your message here..." name="message"/>
+                            <input id="message" type="text" class="form-control input-sm chat_input"
+                                   placeholder="Write your message here..." name="message"/>
 
 
-                                <span class="input-group-btn">
-                        <button type="submit" class="btn btn-primary btn-sm" id="btn-chat"><i class="fa fa-send fa-1x"
-                                                                                              aria-hidden="true"></i></button>
+                            <span class="input-group-btn">
+                        <button type="submit" data-username="{{ current_user.username }}" data-time="{{ date }}"
+                                data-validate-username-url="{% url 'send_message' group_details.id %}"
+                                class="btn btn-primary btn-sm" id="sendMessage"><i class="fa fa-send fa-1x"
+                                                                                   aria-hidden="true"></i></button>
                         </span>
 
 
-                        </form>
-
+                        </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 
 </body>
 </html>

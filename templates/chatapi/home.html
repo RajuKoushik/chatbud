@@ -1,23 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<style>
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    a {
+        all: unset;
+    }
+
+    .button2 {
+        background-color: #008CBA;
+    }
+
+    /* Blue */
+    .button3 {
+        background-color: #f44336;
+    }
+
+    /* Red */
+    .button4 {
+        background-color: #e7e7e7;
+        color: black;
+    }
+
+    /* Gray */
+    .button5 {
+        background-color: #555555;
+    }
+
+    /* Black */
+</style>
+
+
 <head>
     <meta charset="UTF-8">
 
-<h1>CHAT BUD</h1>
+    <h1>CHAT BUD</h1>
 
-<h1>GROUP LIST</h1>
+    <h1>GROUP LIST</h1>
+
+    <button class="button button2"><a href="{% url 'create_group' %}">Create a new Group</a></button>
+
+
 
     {% for group in groups %}
-    <div class="container" style="max-width: 800px; margin : 0 auto;">
-    <div class="jumbotron">
-        <div id="project">
-            <h2 id="btitle"><a href={{ group.id }} style="color:#bc873e "><center><strong>{{ group.title}}</strong><center></a></h2>
-            <p id="date"><center>{{ group.created }}</center></p>
+        <div class="container" style="max-width: 800px; margin : 0 auto;">
+            <div class="jumbotron">
+                <div id="project">
+                    <h2 id="btitle"><a href={{ group.id }} style="color:#bc873e ">
+                        <center><strong>{{ group.title }}</strong>
+                            <center></a>
+                    </h2>
+                    <p id="date">
+                    <center>{{ group.created }}</center>
+                    </p>
+                </div>
+                <p id="text">{{ group.admin.username|linebreaksbr }}</p>
+            </div>
         </div>
-        <p id="text">{{ group.admin.username|linebreaksbr }}</p>
-    </div>
-    </div>
-{% endfor %}
+    {% endfor %}
 
 </head>
 <body>
