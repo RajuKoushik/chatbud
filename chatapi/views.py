@@ -17,7 +17,24 @@ def home(request):
 @login_required
 def create_group(request):
     current_user = request.user
-    return render(request, 'chatapi/create_group.html', {'current_user': current_user})
+
+    if request.method == "POST":
+        print(current_user)
+        print(request.POST.get("group_name"))
+        print(request.POST.get("group_description"))
+
+        new_group = Group()
+        new_group.admin = current_user
+        new_group.title = request.POST.get("group_name")
+        new_group.description = request.POST.get("group_description")
+        new_group.save()
+
+        connection = Connection()
+        connection.group = new_group
+        connection.user = current_user
+        connection.save()
+
+    return render(request, 'chatapi/create_group.html', {'current_user': current_user, })
 
 
 @login_required
