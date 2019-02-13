@@ -31,3 +31,29 @@ def group_chat(request, group_id):
     return render(request, 'chatapi/group_chat.html',
                   {'messages': messages, 'group_details': group_details, 'user': user, 'connection': connection,
                    'current_user': current_user})
+
+
+@login_required
+def send_message(request, group_id):
+    if request.method == "POST":
+        print(group_id)
+        print(request.POST.get("message"))
+        group = Group.objects.get(pk=group_id)
+        current_user = request.user
+        message_object = Message()
+        message_object.group = group
+        message_object.author = current_user
+        message_object.content = request.POST.get("message")
+        message_object.save()
+
+        # getting back
+
+        group_details = Group.objects.get(pk=group_id)
+        messages = Message.objects.filter(group=group_details)
+
+        user = User.objects.get(username=current_user.username)
+        connection = Connection.objects.filter(group=group_details)
+
+    return render(request, 'chatapi/group_chat.html',
+                  {'messages': messages, 'group_details': group_details, 'user': user, 'connection': connection,
+                   'current_user': current_user})

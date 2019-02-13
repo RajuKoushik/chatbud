@@ -222,7 +222,6 @@
                     {% endfor %}
 
 
-
                     </tbody>
                 </table>
             </div>
@@ -235,7 +234,7 @@
                     <div class="panel-heading top-bar">
                         <div class="col-md-8 col-xs-8">
                             <h3 class="panel-title"><span class="glyphicon glyphicon-comment"></span> Chat
-                                - {{ group_details.title}}</h3>
+                                - {{ group_details.title }}</h3>
                         </div>
                     </div>
                     <div class="panel-body msg_container_base">
@@ -272,35 +271,35 @@
 
                             {% if message.author.username in current_user.username %}
 
-                            <div class="row msg_container base_sent">
-                                <div class="col-md-10 col-xs-10">
-                                    <div class="messages msg_sent">
-                                        <p>{{ message.content }}</p>
-                                        <time datetime="2009-11-13T20:00">{{ message.author.username }}
-                                            • {{ message.created }}</time>
+                                <div class="row msg_container base_sent">
+                                    <div class="col-md-10 col-xs-10">
+                                        <div class="messages msg_sent">
+                                            <p>{{ message.content }}</p>
+                                            <time datetime="2009-11-13T20:00">{{ message.author.username }}
+                                                • {{ message.created }}</time>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-xs-2 avatar">
+                                        <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
+                                             class=" img-responsive ">
                                     </div>
                                 </div>
-                                <div class="col-md-2 col-xs-2 avatar">
-                                    <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
-                                         class=" img-responsive ">
-                                </div>
-                            </div>
 
                             {% else %}
 
                                 <div class="row msg_container base_receive">
-                            <div class="col-md-2 col-xs-2 avatar">
-                                <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
-                                     class=" img-responsive ">
-                            </div>
-                            <div class="col-md-10 col-xs-10">
-                                <div class="messages msg_receive">
-                                    <p>{{ message.content }}</p>
-                                    <time datetime="2009-11-13T20:00">{{ message.author.username }}
-                                            • {{ message.created }}</time>
+                                    <div class="col-md-2 col-xs-2 avatar">
+                                        <img src="http://www.bitrebels.com/wp-content/uploads/2011/02/Original-Facebook-Geek-Profile-Avatar-1.jpg"
+                                             class=" img-responsive ">
+                                    </div>
+                                    <div class="col-md-10 col-xs-10">
+                                        <div class="messages msg_receive">
+                                            <p>{{ message.content }}</p>
+                                            <time datetime="2009-11-13T20:00">{{ message.author.username }}
+                                                • {{ message.created }}</time>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
 
 
 
@@ -316,23 +315,33 @@
 
                         {% endfor %}
 
-
                     </div>
                     <div class="panel-footer">
-                        <div class="input-group">
-                            <input id="btn-input" type="text" class="form-control input-sm chat_input"
-                                   placeholder="Write your message here..."/>
-                            <span class="input-group-btn">
-                        <button class="btn btn-primary btn-sm" id="btn-chat"><i class="fa fa-send fa-1x"
-                                                                                aria-hidden="true"></i></button>
+                        <form action="{% url 'send_message' group_details.id %}" method="post">
+                            {% csrf_token %}
+
+
+                            <div class="input-group">
+
+                                <input id="btn-input" type="text" class="form-control input-sm chat_input"
+                                       placeholder="Write your message here..." name="message"/>
+
+
+                                <span class="input-group-btn">
+                        <button type="submit" class="btn btn-primary btn-sm" id="btn-chat"><i class="fa fa-send fa-1x"
+                                                                                              aria-hidden="true"></i></button>
                         </span>
-                        </div>
+
+
+                        </form>
+
                     </div>
                 </div>
-
             </div>
+
         </div>
     </div>
+</div>
 
 </body>
 </html>
