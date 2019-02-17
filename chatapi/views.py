@@ -1,7 +1,10 @@
+import json
+
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.utils.safestring import mark_safe
 from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
@@ -12,6 +15,11 @@ from .models import *
 def home(request):
     groups = Group.objects.all()
     return render(request, 'chatapi/home.html', {'groups': groups})
+
+
+def homy(request):
+    groups = Group.objects.all()
+    return render(request, 'chatapi/login.html', {})
 
 
 @login_required
@@ -130,3 +138,14 @@ def send_message(request, group_id):
     }
 
     return JsonResponse(data)
+
+
+def index(request):
+    return render(request, 'chatapi/index.html', {})
+
+
+def room(request, room_name):
+    print('ram')
+    return render(request, 'chatapi/room.html', {
+        'room_name_json': mark_safe(json.dumps(room_name))
+    })
