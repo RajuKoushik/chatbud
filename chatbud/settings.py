@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'chatapi',
     'channels',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +48,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'chatbud.urls'
@@ -63,6 +66,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -119,3 +125,20 @@ STATIC_URL = '/static/'
 ASGI_APPLICATION = "chatbud.routing.application"
 
 LOGIN_REDIRECT_URL = '/'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
+    'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GITHUB_KEY = '809bb8379663b946b9af'
+SOCIAL_AUTH_GITHUB_SECRET = 'a9da7896f06511d5db8d43159d96825beadc23cf'
+
+SOCIAL_AUTH_FACEBOOK_KEY = '784914265195997'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '893c5dee868f13b2a0129196b39ee6bf'
+
+# Force HTTPS in the final URIs
+SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
