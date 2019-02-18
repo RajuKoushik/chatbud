@@ -7,7 +7,7 @@ Automat==0.7.0
 captcha==0.3
 certifi==2018.11.29
 channels==2.1.7
-channels-redis==2.3.3
+channels-redis
 chardet==3.0.4
 constantly==15.1.0
 daphne==2.2.5
@@ -35,3 +35,4 @@ Twisted==18.9.0
 txaio==18.8.1
 urllib3==1.24.1
 zope.interface==4.6.0
+django-channels
