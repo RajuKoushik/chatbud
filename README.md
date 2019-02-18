@@ -27,3 +27,5 @@ python manage.py runserver
 
 # check out the url : http://localhost:8000/home/
 
+The facebook login wouldn't work right now due to the change in Facebook's policy in 2017. The login would work once the same application is hosted online. (Wouldn't support localhost)
+
