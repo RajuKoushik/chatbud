@@ -375,10 +375,10 @@
 
         <nav>
             <ul>
-                <li><a href=".sec01">LOGIN</a></li>
-                <li><a href=".sec02">NEW GROUP</a></li>
+                <li><a href="{% url 'homy' %}">LOGIN</a></li>
+                <li><a href="{% url 'create_group' %}">NEW GROUP</a></li>
 
-                <li><a href=".sec04">LOGOUT</a></li>
+                <li><a href="{% url 'logout' %}">LOGOUT</a></li>
             </ul>
         </nav>
 
@@ -420,18 +420,18 @@
     <div class="container" style="max-width: 800px; margin : 0 auto; font-family: 'Varela Round' ">
 
         <div class="jumbotron">
-                <div id="project">
-                    <h2 id="btitle"><a href={{ group.id }} style="color:#333333 ">
-                        <center><strong>{{ group.title }}</strong>
-                            <center></a>
-                    </h2>
-                    <p id="date" style="font-family: 'Varela Round'">
-                    <center>Created : {{ group.created }}</center>
-                    </p>
-                </div>
-            <center><p id="text">Group Admin : {{ group.admin.username|linebreaksbr }}</p></center>
+            <div id="project">
+                <h2 id="btitle"><a href={{ group.id }} style="color:#333333 ">
+                    <center><strong>{{ group.title }}</strong>
+                        <center></a>
+                </h2>
+                <p id="date" style="font-family: 'Varela Round'">
+                <center>Created : {{ group.created }}</center>
+                </p>
             </div>
+            <center><p id="text">Group Admin : {{ group.admin.username|linebreaksbr }}</p></center>
         </div>
+    </div>
 
 
     <center><p>.</p></center>

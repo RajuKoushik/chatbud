@@ -115,6 +115,19 @@ def send_message(request, group_id):
     group = Group.objects.get(pk=group_id)
     current_user = request.user
 
+    get_obj = None
+
+    try:
+        get_obj = Connection.objects.get(group=group, user=user)
+    except:
+        b = 1
+
+    if get_obj is None:
+        new_connection = Connection()
+        new_connection.group = group
+        new_connection.user = user
+        new_connection.save()
+
     message_object.group = group
     message_object.author = current_user
     message_object.content = request.POST.get("message")
