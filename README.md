@@ -22,10 +22,16 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 
+TEST USER FOR LOGIN:
+username - koushik
+password - rituraja
+
 
 ```
 
 # check out the url : http://localhost:8000/home/
+
+
 
 The facebook login wouldn't work right now due to the change in Facebook's policy in 2017. The login would work once the same application is hosted online. (Wouldn't support localhost)
 
