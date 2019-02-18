@@ -21,8 +21,9 @@ pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
-http://localhost:8000/
+
+
 ```
 
-
+# check out the url : http://localhost:8000/home/
 
