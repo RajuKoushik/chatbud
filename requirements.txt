@@ -5,7 +5,7 @@ attrs==18.2.0
 autobahn==19.2.1
 Automat==0.7.0
 captcha==0.3
-certifi==2018.11.29
+certifi==2022.12.7
 channels==2.1.7
 channels-redis
 chardet==3.0.4
